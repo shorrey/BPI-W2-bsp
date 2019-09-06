@@ -149,5 +149,27 @@
 			reg = <RPC_COMM_PHYS RPC_COMM_SIZE>;
 		};
 	};
+
+    leds {
+		compatible = "gpio-leds";
+
+        red {
+			label = "red";
+			gpios = <&rtk_iso_gpio 27 1 0>;
+			linux,default-trigger = "heartbeat";
+		};
+
+        green {
+			label = "green";
+			gpios = <&rtk_misc_gpio 97 1 0>;
+			linux,default-trigger = "disk-activity";
+		};
+
+        blue {
+			label = "blue";
+			gpios = <&rtk_misc_gpio 98 1 0>;
+			linux,default-trigger = "mmc0";
+		};
+	};
 };
 
