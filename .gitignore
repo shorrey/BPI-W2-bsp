@@ -1,0 +1,6 @@
+SD
+chosen_board.mk
+env.sh
+linux-rt/output/
+rt-pack/rtk/bpi-w2/bin/u-boot.bin
+
