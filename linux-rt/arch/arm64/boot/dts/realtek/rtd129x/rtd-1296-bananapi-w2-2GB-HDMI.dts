@@ -171,5 +171,11 @@
 			linux,default-trigger = "mmc0";
 		};
 	};
+
+    gpio_fan {
+        compatible = "gpio-fan";
+        gpios = <&rtk_misc_gpio 15 1 0>;
+        gpio-fan,speed-map = <0 0 200 1>;
+    };
 };
 
