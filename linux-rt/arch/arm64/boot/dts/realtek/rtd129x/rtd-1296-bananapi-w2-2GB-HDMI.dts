@@ -150,32 +150,55 @@
 		};
 	};
 
-    leds {
+   leds {
 		compatible = "gpio-leds";
 
-        red {
+    red {
 			label = "red";
 			gpios = <&rtk_iso_gpio 27 1 0>;
 			linux,default-trigger = "heartbeat";
 		};
 
-        green {
+    green {
 			label = "green";
 			gpios = <&rtk_misc_gpio 97 1 0>;
 			linux,default-trigger = "disk-activity";
 		};
 
-        blue {
+    blue {
 			label = "blue";
 			gpios = <&rtk_misc_gpio 98 1 0>;
 			linux,default-trigger = "mmc0";
 		};
 	};
 
-    gpio_fan {
-        compatible = "gpio-fan";
-        gpios = <&rtk_misc_gpio 15 1 0>;
-        gpio-fan,speed-map = <0 0 200 1>;
+  gpio_fan: gpio-fan {
+    compatible = "gpio-fan";
+    gpios = <&rtk_misc_gpio 15 1 0>;
+    gpio-fan,speed-map = <0 0 200 1>;
+    #cooling-cells = <2>;
+  };
+
+  thermal-zones {
+    cpu_thermal: cpu-thermal {
+
+      trips {
+        cpu_50: cpu_50 {
+          temperature = <50000>;
+          hysteresis = <1000>;
+          type = "active";
+        };
+      };
+
+      cooling-maps {
+        map50 {
+          trip = <&cpu_50>;
+          cooling-device = <&gpio_fan 1 1>;
+        };
+      };
+
     };
+  };
+    
 };
 
